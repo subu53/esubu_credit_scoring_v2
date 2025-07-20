@@ -257,103 +257,54 @@ def logout():
     st.rerun()
 
 def loan_application():
-    st.title("💰 Loan Application")
-    st.write("Please fill in the following details for your loan application:")
+    st.header("💰 Loan Application")
+    st.markdown("Please fill in the following details to apply for a loan:")
 
-    with st.form("loan_application_form"):
-        col1, col2 = st.columns(2)
+    # User Inputs - simplified, relevant, and renamed
+    age = st.number_input("Age", min_value=18, max_value=100, value=30)
 
-        with col1:
-            age = st.number_input("Age (Years)", min_value=18, max_value=100, value=30)
-            years_in_job = st.number_input("Years in Current Job", min_value=0.0, max_value=50.0, value=3.0)
-            mm_account_age = st.number_input("Mobile Money Account Age (Months)", min_value=0, max_value=240, value=24)
-            savings_income_ratio = st.number_input("Savings to Income Ratio", min_value=0.0, max_value=1.0, value=0.2)
-            sacco_membership_years = st.number_input("Sacco Membership (Years)", min_value=0, max_value=50, value=5)
-            past_loan_default = st.selectbox("Past Loan Default?", ['Yes', 'No'])
-            loan_amount_requested = st.number_input("Requested Loan Amount (KES)", min_value=1000, value=50000)
-            informal_employment = st.selectbox("Informal Employment?", ['Yes', 'No'])
+    employment_status = st.selectbox("Employment Status", [
+        "Self-employed", "Informal", "Formal", "Unemployed"
+    ])
 
-        with col2:
-            years_with_bank = st.number_input("Years With Bank Account", min_value=0, max_value=100, value=6)
-            debt_income_ratio = st.number_input("Debt-to-Income Ratio", min_value=0.0, max_value=1.0, value=0.3)
-            income = st.number_input("Monthly Income (KES)", min_value=0, value=50000)
-            disposable_income = st.number_input("Disposable Income (KES)", min_value=0, value=20000)
-            mm_score = st.slider("Mobile Money Score", 0, 100, 70)
-            monthly_savings = st.number_input("Monthly Savings (KES)", min_value=0, value=5000)
-            sacco_shares = st.number_input("Sacco Shares Value (KES)", min_value=0, value=15000)
-            current_debt = st.number_input("Current Debt (KES)", min_value=0, value=10000)
-            active_loans = st.number_input("Number of Active Loans", min_value=0, max_value=50, value=1)
-            mm_transactions = st.number_input("Mobile Money Transactions (Monthly)", min_value=0, value=20)
-            mm_volume = st.number_input("Mobile Money Volume (KES/month)", min_value=0, value=30000)
-            credit_history = st.number_input("Credit History Length (Years)", min_value=0, max_value=100, value=5)
-            loan_income_ratio = st.number_input("Loan-to-Income Ratio", min_value=0.0, max_value=5.0, value=1.0)
-            debt_service_ratio = st.number_input("Debt Service Ratio", min_value=0.0, max_value=1.0, value=0.35)
-            sacco_contrib = st.number_input("Monthly Sacco Contribution (KES)", min_value=0, value=2000)
-            household_size = st.number_input("Household Size", min_value=1, max_value=20, value=4)
-            asset_score = st.slider("Asset Ownership Score", 0, 100, 60)
-            dependents = st.number_input("Number of Dependents", min_value=0, max_value=10, value=2)
-            prev_sacco_loans = st.selectbox("Previous Sacco Loans?", ['Yes', 'No'])
-            region_type = st.selectbox("Region Type", ['Urban', 'Rural', 'Semi-Urban'])
-            prev_loans_count = st.number_input("Number of Previous Loans", min_value=0, max_value=50, value=1)
+    monthly_income = st.number_input("Monthly Income (KES)", min_value=0, value=50000)
 
-        submitted = st.form_submit_button("Submit Application")
+    monthly_savings = st.number_input("Monthly Savings (KES)", min_value=0, value=5000)
 
-        if submitted:
-            model = load_model()
-            if model is None:
-                st.error("Unable to process application. Model not available.")
-                return
+    requested_loan_amount = st.number_input("Requested Loan Amount (KES)", min_value=1000, value=30000)
 
-            # Construct input DataFrame
-            input_data = pd.DataFrame([{
-                'Age': age,
-                'Years_In_Current_Job': years_in_job,
-                'Mobile_Money_Account_Age_Months': mm_account_age,
-                'Savings_to_Income_Ratio': savings_income_ratio,
-                'Sacco_Membership_Years': sacco_membership_years,
-                'Past_Loan_Default': past_loan_default,
-                'Requested_Loan_Amount_KES': loan_amount_requested,
-                'Employment_Status_Informal': informal_employment,
-                'Years_With_Bank_Account': years_with_bank,
-                'Debt_to_Income_Ratio': debt_income_ratio,
-                'Monthly_Income_KES': income,
-                'Disposable_Income_KES': disposable_income,
-                'Mobile_Money_Score': mm_score,
-                'Monthly_Savings_KES': monthly_savings,
-                'Sacco_Shares_Value_KES': sacco_shares,
-                'Current_Debt_KES': current_debt,
-                'Active_Loan_Count': active_loans,
-                'Monthly_Mobile_Money_Transactions': mm_transactions,
-                'Monthly_Mobile_Money_Volume_KES': mm_volume,
-                'Credit_History_Length_Years': credit_history,
-                'Loan_to_Income_Ratio': loan_income_ratio,
-                'Debt_Service_Ratio': debt_service_ratio,
-                'Monthly_Sacco_Contribution_KES': sacco_contrib,
-                'Household_Size': household_size,
-                'Asset_Ownership_Score': asset_score,
-                'Dependents': dependents,
-                'Previous_Sacco_Loans': prev_sacco_loans,
-                'Region_Type_Semi-Urban': 1 if region_type == 'Semi-Urban' else 0,
-                'Previous_Loans_Count': prev_loans_count
-            }])
+    years_with_sacco = st.number_input("Years With SACCO", min_value=0, max_value=40, value=3)
 
-            # Run decision engine
-            results = run_decision_engine(model, input_data)
+    mobile_money_account_age = st.number_input("Mobile Money Account Age (Months)", min_value=0, max_value=240, value=24)
 
-            if results:
-                st.markdown("---")
-                st.subheader("📋 Decision Result")
-                st.markdown(results['message'])
-                st.info(f"**Probability of Approval:** {results['probability']*100:.2f}%")
+    total_mobile_money_last_month = st.number_input("Total Mobile Money Transacted Last Month (KES)", min_value=0, value=15000)
 
-                # Officer/Admin override for 'Review'
-                if st.session_state.role in ["officer", "admin"] and results['decision'] == 'Review':
-                    st.warning("⚠️ This application requires manual review. You can override the system's decision below.")
-                    override = st.selectbox("Override Decision", ['No Action', 'Approve', 'Reject'])
-                    if override != 'No Action':
-                        if st.button("Confirm Override"):
-                            st.success(f"✅ Decision overridden to: {override}")
-                            # Optional: Log override action here
+    credit_history_length = st.number_input("Credit History Length (Years)", min_value=0, max_value=30, value=2)
+
+    past_loan_default = st.radio("Have you defaulted on a loan before?", ["Yes", "No"])
+    past_loan_default = 1 if past_loan_default == "Yes" else 0
+
+    active_loans = st.number_input("Number of Active Loans", min_value=0, max_value=10, value=0)
+
+    household_size = st.number_input("Household Size", min_value=1, max_value=20, value=3)
+
+    # Return input features as dictionary
+    return {
+        "Age": age,
+        "Employment_Status_Informal": 1 if employment_status == "Informal" else 0,
+        "Employment_Status_Self-employed": 1 if employment_status == "Self-employed" else 0,
+        "Employment_Status_Unemployed": 1 if employment_status == "Unemployed" else 0,
+        "Monthly_Income_KES": monthly_income,
+        "Monthly_Savings_KES": monthly_savings,
+        "Requested_Loan_Amount_KES": requested_loan_amount,
+        "Years_With_SACCO": years_with_sacco,
+        "Mobile_Money_Account_Age_Months": mobile_money_account_age,
+        "Monthly_Mobile_Money_Volume_KES": total_mobile_money_last_month,
+        "Credit_History_Length_Years": credit_history_length,
+        "Past_Loan_Default": past_loan_default,
+        "Active_Loan_Count": active_loans,
+        "Household_Size": household_size
+    }
 
 def admin_dashboard():
     st.title("👨‍💼 Admin Dashboard")
