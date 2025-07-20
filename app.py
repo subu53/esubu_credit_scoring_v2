@@ -188,15 +188,15 @@ def run_decision_engine(model, input_df):
     if model is None:
         return None
 
-    # List of all 90 columns in the order from your training data
-    all_columns = [
-        "Age", "Gender", "Years_In_Current_Job", "Education_Level", "Household_Size", "Dependents", "Monthly_Income_KES", "Years_With_Bank_Account", "Has_Savings_Account", "Monthly_Savings_KES", "Credit_History_Length_Years", "Previous_Loans_Count", "Past_Loan_Default", "Active_Loan_Count", "Current_Debt_KES", "Mobile_Money_Account_Age_Months", "Monthly_Mobile_Money_Transactions", "Monthly_Mobile_Money_Volume_KES", "Receives_Regular_Remittances", "Sends_Regular_Remittances", "Uses_Mobile_Savings", "Sacco_Membership_Years", "Monthly_Sacco_Contribution_KES", "Sacco_Shares_Value_KES", "Previous_Sacco_Loans", "Requested_Loan_Amount_KES", "Loan_Term_Months", "Has_Collateral", "Guarantor_Available", "Business_License", "Asset_Ownership_Score", "Debt_to_Income_Ratio", "Loan_to_Income_Ratio", "Savings_Rate", "Loan_Status", "Debt_Service_Ratio", "Savings_to_Income_Ratio", "Sacco_Contribution_Rate", "Disposable_Income_KES", "Is_New_Borrower", "Mobile_Money_Score", "Has_Strong_Guarantor_Signal", "County_Eldoret", "County_Embu", "County_Garissa", "County_Homa Bay", "County_Isiolo", "County_Kakamega", "County_Kericho", "County_Kisumu", "County_Kitale", "County_Machakos", "County_Malindi", "County_Marsabit", "County_Meru", "County_Mombasa", "County_Nairobi", "County_Nakuru", "County_Nyeri", "County_Thika", "County_Voi", "Employment_Status_Informal", "Employment_Status_Self_Employed", "Employment_Status_Student", "Employment_Status_Unemployed", "Employment_Sector_Construction", "Employment_Sector_ICT", "Employment_Sector_Manufacturing", "Employment_Sector_Mining", "Employment_Sector_Other", "Employment_Sector_Public Sector", "Employment_Sector_Services", "Employment_Sector_Tourism", "Employment_Sector_Trade", "Employment_Sector_Transport", "Marital_Status_Married", "Marital_Status_Single", "Marital_Status_Widowed", "Loan_Purpose_Asset_Purchase", "Loan_Purpose_Business_Expansion", "Loan_Purpose_Debt_Consolidation", "Loan_Purpose_Education", "Loan_Purpose_Emergency", "Loan_Purpose_Home_Improvement", "Loan_Purpose_Medical", "Primary_Mobile_Money_Equitel", "Primary_Mobile_Money_M-Pesa", "Primary_Mobile_Money_T-Kash", "Region_Type_Semi-Urban", "Region_Type_Urban"
+    # List of the 30 features in the order from df.info
+    feature_names = [
+        "Age", "Years_In_Current_Job", "Household_Size", "Monthly_Income_KES", "Monthly_Savings_KES", "Credit_History_Length_Years", "Past_Loan_Default", "Active_Loan_Count", "Current_Debt_KES", "Mobile_Money_Account_Age_Months", "Monthly_Mobile_Money_Transactions", "Monthly_Mobile_Money_Volume_KES", "Sacco_Membership_Years", "Monthly_Sacco_Contribution_KES", "Sacco_Shares_Value_KES", "Requested_Loan_Amount_KES", "Asset_Ownership_Score", "Debt_to_Income_Ratio", "Loan_to_Income_Ratio", "Debt_Service_Ratio", "Savings_to_Income_Ratio", "Sacco_Contribution_Rate", "Disposable_Income_KES", "Mobile_Money_Score", "Region_Type_Semi-Urban", "Region_Type_Urban", "Employment_Status_Informal", "Previous_Sacco_Loans", "Years_With_Bank_Account", "Savings_Rate", "Loan_Term_Months"
     ]
 
     # Set default values: 0 for numeric, False for bool
-    row = {col: 0 for col in all_columns}
-    # Set bool columns to False
-    bool_cols = [col for col in all_columns if "County_" in col or "Employment_Status_" in col or "Employment_Sector_" in col or "Marital_Status_" in col or "Loan_Purpose_" in col or "Primary_Mobile_Money_" in col or "Region_Type_" in col]
+    row = {col: 0 for col in feature_names}
+    # Set bool columns to False (if any)
+    bool_cols = [col for col in feature_names if "Region_Type_" in col or "Employment_Status_" in col]
     for col in bool_cols:
         row[col] = False
 
@@ -206,7 +206,7 @@ def run_decision_engine(model, input_df):
             row[col] = input_df[col].values[0]
 
     # Build DataFrame
-    full_input_df = pd.DataFrame([row], columns=all_columns)
+    full_input_df = pd.DataFrame([row], columns=feature_names)
 
     # Predict probability
     try:
