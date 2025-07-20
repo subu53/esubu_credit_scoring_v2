@@ -188,13 +188,8 @@ def run_decision_engine(model, input_df):
     if model is None:
         return None
 
-    # Load and apply preprocessing pipeline
-    try:
-        pipeline = joblib.load("preprocessing_pipeline.pkl")
-        input_transformed = pipeline.transform(input_df)
-    except Exception as e:
-        st.error(f"Error loading or applying preprocessing pipeline: {e}")
-        return None
+    # TEMP: Skip preprocessing pipeline, use raw input
+    input_transformed = input_df
 
     # Predict probability
     try:
@@ -204,12 +199,17 @@ def run_decision_engine(model, input_df):
         return None
 
     # Use original (non-transformed) values for logic decisions
-    income = input_df['monthly_income'].values[0]
-    repayment_history = input_df['repayment_history'].values[0]
-    has_collateral = input_df['has_collateral'].values[0]
-    missing_docs = input_df['missing_documents'].values[0]
+    # (Update these keys if your form/dataframe structure is different)
+    # Example: income = input_df['Monthly_Income_KES'].values[0]
+    #          repayment_history = ...
+    #          has_collateral = ...
+    #          missing_docs = ...
+    # For now, just pass income and set others to None or reasonable defaults
+    income = input_df['Monthly_Income_KES'].values[0] if 'Monthly_Income_KES' in input_df else 0
+    repayment_history = None
+    has_collateral = None
+    missing_docs = False
 
-    # Business logic
     credit_score, decision = decision_logic(prob, income, repayment_history, has_collateral, missing_docs)
 
     approved_loan_amount = None
