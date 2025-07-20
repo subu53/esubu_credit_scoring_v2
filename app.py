@@ -188,9 +188,9 @@ def run_decision_engine(model, input_df):
     if model is None:
         return None
 
-    # List of the 30 features in the order from df.info
+    # List of the 30 features in the order from df.info (Loan_Term_Months removed)
     feature_names = [
-        "Age", "Years_In_Current_Job", "Household_Size", "Monthly_Income_KES", "Monthly_Savings_KES", "Credit_History_Length_Years", "Past_Loan_Default", "Active_Loan_Count", "Current_Debt_KES", "Mobile_Money_Account_Age_Months", "Monthly_Mobile_Money_Transactions", "Monthly_Mobile_Money_Volume_KES", "Sacco_Membership_Years", "Monthly_Sacco_Contribution_KES", "Sacco_Shares_Value_KES", "Requested_Loan_Amount_KES", "Asset_Ownership_Score", "Debt_to_Income_Ratio", "Loan_to_Income_Ratio", "Debt_Service_Ratio", "Savings_to_Income_Ratio", "Sacco_Contribution_Rate", "Disposable_Income_KES", "Mobile_Money_Score", "Region_Type_Semi-Urban", "Region_Type_Urban", "Employment_Status_Informal", "Previous_Sacco_Loans", "Years_With_Bank_Account", "Savings_Rate", "Loan_Term_Months"
+        "Age", "Years_In_Current_Job", "Household_Size", "Monthly_Income_KES", "Monthly_Savings_KES", "Credit_History_Length_Years", "Past_Loan_Default", "Active_Loan_Count", "Current_Debt_KES", "Mobile_Money_Account_Age_Months", "Monthly_Mobile_Money_Transactions", "Monthly_Mobile_Money_Volume_KES", "Sacco_Membership_Years", "Monthly_Sacco_Contribution_KES", "Sacco_Shares_Value_KES", "Requested_Loan_Amount_KES", "Asset_Ownership_Score", "Debt_to_Income_Ratio", "Loan_to_Income_Ratio", "Debt_Service_Ratio", "Savings_to_Income_Ratio", "Sacco_Contribution_Rate", "Disposable_Income_KES", "Mobile_Money_Score", "Region_Type_Semi-Urban", "Region_Type_Urban", "Employment_Status_Informal", "Previous_Sacco_Loans", "Years_With_Bank_Account", "Savings_Rate"
     ]
 
     # Set default values: 0 for numeric, False for bool
