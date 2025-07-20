@@ -257,42 +257,30 @@ def logout():
     st.rerun()
 
 def loan_application():
-    st.header("💰 Loan Application")
+    st.header("\U0001F4B0 Loan Application")
     st.markdown("Please fill in the following details to apply for a loan:")
 
     with st.form("loan_application_form"):
         age = st.number_input("Age", min_value=18, max_value=100, value=30)
-
         employment_status = st.selectbox("Employment Status", [
             "Self-employed", "Informal", "Formal", "Unemployed"
         ])
-
         monthly_income = st.number_input("Monthly Income (KES)", min_value=0, value=50000)
-
         monthly_savings = st.number_input("Monthly Savings (KES)", min_value=0, value=5000)
-
         requested_loan_amount = st.number_input("Requested Loan Amount (KES)", min_value=1000, value=30000)
-
         years_with_sacco = st.number_input("Years With SACCO", min_value=0, max_value=40, value=3)
-
         mobile_money_account_age = st.number_input("Mobile Money Account Age (Months)", min_value=0, max_value=240, value=24)
-
         total_mobile_money_last_month = st.number_input("Total Mobile Money Transacted Last Month (KES)", min_value=0, value=15000)
-
         credit_history_length = st.number_input("Credit History Length (Years)", min_value=0, max_value=30, value=2)
-
         past_loan_default = st.radio("Have you defaulted on a loan before?", ["Yes", "No"])
         past_loan_default = 1 if past_loan_default == "Yes" else 0
-
         active_loans = st.number_input("Number of Active Loans", min_value=0, max_value=10, value=0)
-
         household_size = st.number_input("Household Size", min_value=1, max_value=20, value=3)
-
-        # Submit button
         submitted = st.form_submit_button("Submit Application")
 
     if submitted:
-        return {
+        # Prepare input data as DataFrame
+        input_data = {
             "Age": age,
             "Employment_Status_Informal": 1 if employment_status == "Informal" else 0,
             "Employment_Status_Self-employed": 1 if employment_status == "Self-employed" else 0,
@@ -308,6 +296,19 @@ def loan_application():
             "Active_Loan_Count": active_loans,
             "Household_Size": household_size
         }
+        input_df = pd.DataFrame([input_data])
+        model = load_model()
+        if model is None:
+            st.error("Model not available.")
+            return
+        results = run_decision_engine(model, input_df)
+        if results:
+            st.markdown("---")
+            st.subheader("\U0001F4CB Decision Result")
+            st.markdown(results['message'])
+            st.info(f"**Probability of Approval:** {results['probability']*100:.2f}%")
+        else:
+            st.error("Unable to process application.")
 
 def admin_dashboard():
     st.title("👨‍💼 Admin Dashboard")
