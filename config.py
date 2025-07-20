@@ -15,7 +15,7 @@ DEFAULT_ADMIN_PASSWORD = os.getenv('DEFAULT_ADMIN_PASSWORD', 'admin123')
 
 # Model paths
 MODEL_PATH = os.getenv('MODEL_PATH', 'credit_scoring_stacked_model.pkl')
-PIPELINE_PATH = os.getenv('PIPELINE_PATH', 'preprocessing_pipeline.pkl')
+PIPELINE_PATH = os.getenv('PIPELINE_PATH', 'preprocessing_pipeline (3).pkl')
 
 # Application settings
 APP_TITLE = os.getenv('APP_TITLE', '🏦 Esubu AI Credit Scoring System')
