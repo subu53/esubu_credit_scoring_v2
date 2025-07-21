@@ -49,3 +49,26 @@ Build a dashboard for loan officers
 Sammy Subu
 Data Scientist | Machine Learning Enthusiast
 LinkedIn @samsubu
+
+## Deployment Instructions
+
+### Local Deployment
+1. Ensure you have Python 3.8 or higher installed.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the Streamlit app:
+   ```bash
+   streamlit run app.py
+   ```
+
+### Deploying on Streamlit Cloud
+1. Push your repository to GitHub (if not already).
+2. Go to [Streamlit Community Cloud](https://streamlit.io/cloud) and sign in.
+3. Click 'New app', select your repository, and set `app.py` as the entry point.
+4. Deploy! The app will automatically use `requirements.txt` to install dependencies.
+
+### Notes
+- Ensure `credit_scoring_stacked_model.pkl` and `preprocessing_pipeline.pkl` are present in the root directory of your repository.
+- If you update dependencies, update `requirements.txt` accordingly.
