@@ -8,3 +8,4 @@ joblib
 bcrypt
 cloudpickle
 catboost
+openpyxl
