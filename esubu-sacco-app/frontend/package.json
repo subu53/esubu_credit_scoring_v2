@@ -1,7 +1,8 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "esubu-sacco-frontend",
+  "version": "1.0.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -23,7 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp public/_redirects build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -44,5 +45,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }

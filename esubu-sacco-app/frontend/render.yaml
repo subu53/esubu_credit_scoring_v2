@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: esubu-sacco-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    pullRequestPreviewsEnabled: false
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: REACT_APP_API_URL
+        value: https://esubu-sacco-backend.onrender.com
