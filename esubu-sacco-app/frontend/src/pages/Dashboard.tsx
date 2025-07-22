@@ -6,7 +6,7 @@ import { LoanApplication, ApplicationStats } from '../types';
 
 const Dashboard: React.FC = () => {
   const { user, logout, isAdmin } = useAuth();
-  const navigate = useNavigate();
+  
   
   const [stats, setStats] = useState<ApplicationStats | null>(null);
   const [applications, setApplications] = useState<LoanApplication[]>([]);

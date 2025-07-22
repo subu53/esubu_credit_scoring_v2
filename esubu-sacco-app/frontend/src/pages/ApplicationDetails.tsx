@@ -7,7 +7,7 @@ import { LoanApplicationWithRemarks } from '../types';
 const ApplicationDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { user, isAdmin } = useAuth();
-  const navigate = useNavigate();
+  
   
   const [application, setApplication] = useState<LoanApplicationWithRemarks | null>(null);
   const [loading, setLoading] = useState(true);

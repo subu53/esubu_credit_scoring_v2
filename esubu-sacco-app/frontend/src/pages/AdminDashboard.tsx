@@ -15,7 +15,6 @@ const AdminDashboard: React.FC = () => {
   
   // User management state
   const [showUserForm, setShowUserForm] = useState(false);
-  const [editingUser, setEditingUser] = useState<User | null>(null);
   const [userForm, setUserForm] = useState<UserForm>({
     email: '',
     password: '',
@@ -203,15 +202,15 @@ const AdminDashboard: React.FC = () => {
                 {/* Stats Grid */}
                 <div className="stats-grid">
                   <div className="stat-card">
-                    <div className="stat-number">{dashboardData.application_stats.total}</div>
+                    <div className="stat-number">{dashboardData.stats.total}</div>
                     <div className="stat-label">Total Applications</div>
                   </div>
                   <div className="stat-card">
-                    <div className="stat-number">{dashboardData.application_stats.approved}</div>
+                    <div className="stat-number">{dashboardData.stats.approved}</div>
                     <div className="stat-label">Approved</div>
                   </div>
                   <div className="stat-card">
-                    <div className="stat-number">{dashboardData.application_stats.pending}</div>
+                    <div className="stat-number">{dashboardData.stats.pending}</div>
                     <div className="stat-label">Pending Review</div>
                   </div>
                   <div className="stat-card">
@@ -519,16 +518,16 @@ const AdminDashboard: React.FC = () => {
                       <div style={{ background: 'var(--gray-100)', padding: '20px', borderRadius: '8px' }}>
                         <div style={{ fontSize: '0.9rem', color: 'var(--gray-600)' }}>Approval Rate</div>
                         <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--primary-green)' }}>
-                          {dashboardData.application_stats.total > 0 
-                            ? Math.round((dashboardData.application_stats.approved / dashboardData.application_stats.total) * 100)
+                          {dashboardData.stats.total > 0 
+                            ? Math.round((dashboardData.stats.approved / dashboardData.stats.total) * 100)
                             : 0}%
                         </div>
                       </div>
                       <div style={{ background: 'var(--gray-100)', padding: '20px', borderRadius: '8px' }}>
                         <div style={{ fontSize: '0.9rem', color: 'var(--gray-600)' }}>Rejection Rate</div>
                         <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--primary-red)' }}>
-                          {dashboardData.application_stats.total > 0 
-                            ? Math.round((dashboardData.application_stats.rejected / dashboardData.application_stats.total) * 100)
+                          {dashboardData.stats.total > 0 
+                            ? Math.round((dashboardData.stats.rejected / dashboardData.stats.total) * 100)
                             : 0}%
                         </div>
                       </div>
