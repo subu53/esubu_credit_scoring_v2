@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esubu SACCO - Empowering Dreams. One Loan at a Time.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏦</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🏦</span>
+                    <span class="logo-text">Esubu SACCO</span>
+                </div>
+                <nav class="nav">
+                    <a href="#home" onclick="showPage('home')">Home</a>
+                    <a href="#services" onclick="showPage('services')">Services</a>
+                    <a href="#about" onclick="showPage('about')">About</a>
+                    <a href="#contact" onclick="showPage('contact')">Contact</a>
+                    <a href="#login" onclick="showPage('login')" class="login-btn">Login</a>
+                </nav>
+                <div class="sasra-badge">SASRA Licensed</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Empowering Dreams. One Loan at a Time.</h1>
+                    <p class="hero-subtitle">Your trusted financial partner since 2015 - Serving over 8,000 members across Kenya</p>
+                    <div class="hero-buttons">
+                        <button onclick="showPage('loan-application')" class="btn btn-primary">Apply for Loan</button>
+                        <button onclick="showPage('services')" class="btn btn-secondary">Our Services</button>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">8,000+</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Years of Service</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">SASRA Compliant</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-preview">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">💰</div>
+                        <h3>Personal Loans</h3>
+                        <p>Quick and affordable personal loans for your immediate needs</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🏠</div>
+                        <h3>Mortgage Loans</h3>
+                        <p>Competitive rates for your dream home financing</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🚗</div>
+                        <h3>Asset Financing</h3>
+                        <p>Vehicle and equipment financing solutions</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💼</div>
+                        <h3>Business Loans</h3>
+                        <p>Grow your business with our flexible business loans</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Loan Application Page -->
+    <div id="loan-application" class="page">
+        <section class="loan-form-section">
+            <div class="container">
+                <div class="form-header">
+                    <h1>Loan Application</h1>
+                    <p>Fill out the form below to apply for a loan</p>
+                </div>
+                
+                <div class="loan-form-container">
+                    <div class="form-sidebar">
+                        <div class="calculator-card">
+                            <h3>Loan Calculator</h3>
+                            <div class="calc-input">
+                                <label>Loan Amount (KES)</label>
+                                <input type="number" id="calc-amount" placeholder="100,000" onchange="calculateLoan()">
+                            </div>
+                            <div class="calc-input">
+                                <label>Term (Months)</label>
+                                <input type="number" id="calc-term" placeholder="12" onchange="calculateLoan()">
+                            </div>
+                            <div class="calc-result">
+                                <div class="result-item">
+                                    <span>Monthly Payment:</span>
+                                    <strong id="monthly-payment">KES 0</strong>
+                                </div>
+                                <div class="result-item">
+                                    <span>Total Interest:</span>
+                                    <strong id="total-interest">KES 0</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-main">
+                        <form id="loanForm" class="loan-form">
+                            <div class="form-step active" id="step-1">
+                                <h3>Personal Information</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>First Name *</label>
+                                        <input type="text" name="firstName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Last Name *</label>
+                                        <input type="text" name="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>ID Number *</label>
+                                        <input type="text" name="idNumber" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone Number *</label>
+                                        <input type="tel" name="phoneNumber" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address *</label>
+                                    <input type="email" name="email" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Date of Birth *</label>
+                                        <input type="date" name="dateOfBirth" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gender *</label>
+                                        <select name="gender" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-navigation">
+                                    <button type="button" onclick="nextStep(2)" class="btn btn-primary">Next Step</button>
+                                </div>
+                            </div>
+
+                            <div class="form-step" id="step-2">
+                                <h3>Employment Information</h3>
+                                <div class="form-group">
+                                    <label>Employment Status *</label>
+                                    <select name="employmentStatus" required>
+                                        <option value="">Select Status</option>
+                                        <option value="employed">Employed</option>
+                                        <option value="self-employed">Self Employed</option>
+                                        <option value="business-owner">Business Owner</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Employer/Business Name *</label>
+                                    <input type="text" name="employerName" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Job Title *</label>
+                                        <input type="text" name="jobTitle" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Monthly Income (KES) *</label>
+                                        <input type="number" name="monthlyIncome" required>
+                                    </div>
+                                </div>
+                                <div class="form-navigation">
+                                    <button type="button" onclick="prevStep(1)" class="btn btn-secondary">Previous</button>
+                                    <button type="button" onclick="nextStep(3)" class="btn btn-primary">Next Step</button>
+                                </div>
+                            </div>
+
+                            <div class="form-step" id="step-3">
+                                <h3>Loan Information</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Loan Type *</label>
+                                        <select name="loanType" required>
+                                            <option value="">Select Loan Type</option>
+                                            <option value="personal">Personal Loan</option>
+                                            <option value="business">Business Loan</option>
+                                            <option value="mortgage">Mortgage Loan</option>
+                                            <option value="asset">Asset Financing</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Requested Amount (KES) *</label>
+                                        <input type="number" name="requestedAmount" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Loan Term (Months) *</label>
+                                        <select name="loanTerm" required>
+                                            <option value="">Select Term</option>
+                                            <option value="6">6 Months</option>
+                                            <option value="12">12 Months</option>
+                                            <option value="18">18 Months</option>
+                                            <option value="24">24 Months</option>
+                                            <option value="36">36 Months</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Loan Purpose *</label>
+                                        <input type="text" name="loanPurpose" required>
+                                    </div>
+                                </div>
+                                <div class="form-navigation">
+                                    <button type="button" onclick="prevStep(2)" class="btn btn-secondary">Previous</button>
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">Submit Application</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Page -->
+    <div id="services" class="page">
+        <section class="services-page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Our Services</h1>
+                    <p>Comprehensive financial solutions for all your needs</p>
+                </div>
+                <div class="services-detailed">
+                    <div class="service-detail">
+                        <div class="service-icon-large">💰</div>
+                        <h3>Personal Loans</h3>
+                        <ul>
+                            <li>Quick approval process</li>
+                            <li>Competitive interest rates</li>
+                            <li>Flexible repayment terms</li>
+                            <li>No hidden charges</li>
+                        </ul>
+                        <button onclick="showPage('loan-application')" class="btn btn-primary">Apply Now</button>
+                    </div>
+                    <div class="service-detail">
+                        <div class="service-icon-large">🏠</div>
+                        <h3>Mortgage Loans</h3>
+                        <ul>
+                            <li>Up to 95% financing</li>
+                            <li>Long-term repayment</li>
+                            <li>Professional guidance</li>
+                            <li>Quick processing</li>
+                        </ul>
+                        <button onclick="showPage('loan-application')" class="btn btn-primary">Apply Now</button>
+                    </div>
+                    <div class="service-detail">
+                        <div class="service-icon-large">💼</div>
+                        <h3>Business Loans</h3>
+                        <ul>
+                            <li>Working capital financing</li>
+                            <li>Equipment financing</li>
+                            <li>Business expansion loans</li>
+                            <li>SME-friendly terms</li>
+                        </ul>
+                        <button onclick="showPage('loan-application')" class="btn btn-primary">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <section class="about-page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>About Esubu SACCO</h1>
+                    <p>Our story, mission, and commitment to empowering dreams</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-story">
+                        <h3>Our Story</h3>
+                        <p>Esubu SACCO was founded in 2015 by three childhood friends from Bungoma County. With humble beginnings as a community table-banking group in a small rural market, the founders saw firsthand how limited access to credit was holding back farmers, boda boda riders, mama mbogas, and teachers.</p>
+                        <p>Since then, Esubu SACCO has grown into a fully licensed deposit-taking SACCO under SASRA, now serving over 8,000 members across Kenya.</p>
+                    </div>
+                    <div class="about-mission">
+                        <h3>Our Mission</h3>
+                        <p>To provide accessible, affordable, and reliable financial services that empower our members to achieve their dreams and improve their livelihoods.</p>
+                    </div>
+                    <div class="about-values">
+                        <h3>Our Values</h3>
+                        <ul>
+                            <li><strong>Integrity:</strong> We conduct our business with honesty and transparency</li>
+                            <li><strong>Excellence:</strong> We strive for the highest standards in all we do</li>
+                            <li><strong>Innovation:</strong> We embrace technology to serve our members better</li>
+                            <li><strong>Community:</strong> We are committed to uplifting our communities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section class="contact-page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Contact Us</h1>
+                    <p>Get in touch with our friendly team</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Visit Our Office</h3>
+                        <div class="contact-item">
+                            <strong>Address:</strong> Bungoma County, Kenya
+                        </div>
+                        <div class="contact-item">
+                            <strong>P.O. Box:</strong> 1234-50200
+                        </div>
+                        <div class="contact-item">
+                            <strong>Phone:</strong> +254 700 123 456
+                        </div>
+                        <div class="contact-item">
+                            <strong>Email:</strong> info@esubusacco.co.ke
+                        </div>
+                        <div class="contact-item">
+                            <strong>Office Hours:</strong> Monday - Friday, 8:00 AM - 5:00 PM
+                        </div>
+                    </div>
+                    <div class="contact-form-container">
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label>Your Name *</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Email *</label>
+                                <input type="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message *</label>
+                                <textarea name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="page">
+        <section class="login-page">
+            <div class="container">
+                <div class="login-container">
+                    <div class="login-header">
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to your account</p>
+                    </div>
+                    <div class="login-type-selector">
+                        <button type="button" class="type-btn active" onclick="setLoginType('member')">Member Login</button>
+                        <button type="button" class="type-btn" onclick="setLoginType('officer')">Officer Login</button>
+                    </div>
+                    <form id="loginForm" class="login-form">
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password *</label>
+                            <input type="password" name="password" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="remember"> Remember me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary login-btn">Sign In</button>
+                    </form>
+                    <div class="signup-link">
+                        <p>Don't have an account? <a href="#loan-application" onclick="showPage('loan-application')">Apply for Membership</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Processing your request...</p>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
