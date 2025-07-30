@@ -27,7 +27,6 @@ const LoanApplicationPage = () => {
 
   const watchedValues = watch([
     'monthlyIncome',
-    'requestedAmount',
     'loanTerm'
   ]);
 
@@ -77,7 +76,7 @@ const LoanApplicationPage = () => {
         
         // Loan Information
         loanType: data.loanType,
-        requestedAmount: parseFloat(data.requestedAmount),
+        // requestedAmount removed; amount will be determined by backend ML
         loanPurpose: data.loanPurpose,
         loanTerm: parseInt(data.loanTerm),
         
@@ -377,30 +376,7 @@ const LoanApplicationPage = () => {
                           {errors.loanType && <span className="error-message">{errors.loanType.message}</span>}
                         </div>
                       </div>
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="form-label">Requested Amount (KES) *</label>
-                          <input
-                            type="number"
-                            min="1000"
-                            max="5000000"
-                            className={`form-control ${errors.requestedAmount ? 'error' : ''}`}
-                            placeholder="100000"
-                            {...register('requestedAmount', { 
-                              required: 'Loan amount is required',
-                              min: {
-                                value: 1000,
-                                message: 'Minimum loan is KES 1,000'
-                              },
-                              max: {
-                                value: 5000000,
-                                message: 'Maximum loan is KES 5,000,000'
-                              }
-                            })}
-                          />
-                          {errors.requestedAmount && <span className="error-message">{errors.requestedAmount.message}</span>}
-                        </div>
-                      </div>
+                      {/* Requested Amount field removed. Amount will be determined by the system. */}
                     </div>
 
                     <div className="row">
@@ -525,8 +501,8 @@ const LoanApplicationPage = () => {
                     </div>
                     <div className="card-body">
                       <div className="calculation-item">
-                        <span>Requested Amount:</span>
-                        <strong>KES {watchedValues[1] ? parseFloat(watchedValues[1]).toLocaleString() : '0'}</strong>
+                        <span>Approved Amount:</span>
+                        <strong>To be determined by system after application</strong>
                       </div>
                       <div className="calculation-item">
                         <span>Loan Term:</span>
